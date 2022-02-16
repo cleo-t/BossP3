@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class HideSpot : MonoBehaviour
 {
     public static bool playerInAnyHideSpot
@@ -28,10 +29,17 @@ public class HideSpot : MonoBehaviour
     void Start()
     {
         this.playerInThisSpot = false;
+        MeshCollider parentMeshCollider = this.GetComponentInParent<MeshCollider>();
+        Mesh parentMesh = parentMeshCollider.sharedMesh;
+        MeshCollider myMeshCollider = this.gameObject.AddComponent<MeshCollider>();
+        myMeshCollider.convex = true;
+        myMeshCollider.isTrigger = true;
+        myMeshCollider.sharedMesh = parentMesh;
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Hit");
         if (other.CompareTag("Player"))
         {
             this.playerInThisSpot = true;
