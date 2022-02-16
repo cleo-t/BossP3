@@ -26,6 +26,11 @@ public class FPSPlayer : MonoBehaviour
     [SerializeField]
     public float crouchHeightCoeff = 0.5f;
 
+    [SerializeField]
+    public float range = 100f;
+
+    public Camera fpsCam;
+
     private bool isCrouching;
     private float initialYScale;
 
@@ -43,6 +48,10 @@ public class FPSPlayer : MonoBehaviour
         float turnInput = this.GetTurnInput();
         this.Turn(turnInput);
         this.isCrouching = this.GetCrouchInput();
+
+        if (Input.GetButtonDown("Fire1")) {
+            Shoot();
+        }
     }
 
     private bool GetCrouchInput()
@@ -95,5 +104,18 @@ public class FPSPlayer : MonoBehaviour
             crouching ? this.initialYScale * this.crouchHeightCoeff : this.initialYScale,
             this.transform.localScale.z);
         this.cc.enabled = true;
+    }
+
+    private void Shoot() 
+    {
+        RaycastHit target;
+        if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out target, range)) {
+
+            SpookyStuff ghost = target.transform.GetComponent<SpookyStuff>();
+
+            if (ghost != null) {
+                ghost.TakeDamage();
+            }
+        }
     }
 }

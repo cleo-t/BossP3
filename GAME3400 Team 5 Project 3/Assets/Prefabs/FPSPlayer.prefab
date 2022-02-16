@@ -167,6 +167,8 @@ MonoBehaviour:
   crouchSpeedCoeff: 0.125
   turnSpeed: 600
   crouchHeightCoeff: 0.5
+  range: 100
+  fpsCam: {fileID: 6167447521975995378}
 --- !u!1 &7902278136512419117
 GameObject:
   m_ObjectHideFlags: 0
