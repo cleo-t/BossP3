@@ -89,9 +89,11 @@ public class FPSPlayer : MonoBehaviour
 
     private void SetCrouching(bool crouching)
     {
+        this.cc.enabled = false;
         this.transform.localScale = new Vector3(
             this.transform.localScale.x,
             crouching ? this.initialYScale * this.crouchHeightCoeff : this.initialYScale,
             this.transform.localScale.z);
+        this.cc.enabled = true;
     }
 }
