@@ -39,7 +39,7 @@ public class HideSpot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         if (other.CompareTag("Player"))
         {
             this.playerInThisSpot = true;
