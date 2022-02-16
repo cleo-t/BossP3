@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpookyStuff : MonoBehaviour
 {
+    public int ghostHealth = 500;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,10 @@ public class SpookyStuff : MonoBehaviour
     void Update()
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("GhostSight").transform);
+    }
+
+    public void AttackPlayer()
+    {
+        
     }
 }

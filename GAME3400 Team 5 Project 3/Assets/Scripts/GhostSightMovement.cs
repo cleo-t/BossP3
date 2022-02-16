@@ -9,6 +9,8 @@ public class GhostSightMovement : MonoBehaviour
     public float z_oscillation_magnitude = 15;
     public float rotationSpeed = 1;
     public float z_offset = 5;
+
+    static public bool playerSpotted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,11 @@ public class GhostSightMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveVision();
+        if (!playerSpotted)
+        {
+            MoveVision();
+        }
+        
     }
 
     void MoveVision()
@@ -46,7 +52,8 @@ public class GhostSightMovement : MonoBehaviour
                 if (hit.collider.tag == "Player")
                 {
                     // Attack the player
-                    
+                    playerSpotted = true;
+                    FindObjectOfType<SpookyStuff>().AttackPlayer();
 
                 }
             }

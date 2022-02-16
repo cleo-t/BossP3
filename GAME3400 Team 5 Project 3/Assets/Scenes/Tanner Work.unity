@@ -38185,6 +38185,7 @@ GameObject:
   - component: {fileID: 1691120418}
   - component: {fileID: 1691120417}
   - component: {fileID: 1691120422}
+  - component: {fileID: 1691120423}
   m_Layer: 8
   m_Name: Ghost thing
   m_TagString: Ghost
@@ -46797,6 +46798,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba791c24cc04b94da1b64c01e457ff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostHealth: 500
+--- !u!95 &1691120423
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691120416}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f82e52513382ea24598bcec6bfa63414, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1734512786
 GameObject:
   m_ObjectHideFlags: 0
