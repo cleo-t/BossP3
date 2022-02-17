@@ -349,6 +349,8 @@ MonoBehaviour:
   gun: {fileID: 8502817431850528198}
   fpsCam: {fileID: 6167447521975995378}
   crosshair: {fileID: 6949224795509074149}
+  pickUpGunClip: {fileID: 8300000, guid: f843304081564498ca91cd0504b4c1f9, type: 3}
+  shootGunClip: {fileID: 8300000, guid: fc62f2f00a98f41e98f129aacef17eb4, type: 3}
 --- !u!136 &1352370951
 CapsuleCollider:
   m_ObjectHideFlags: 0

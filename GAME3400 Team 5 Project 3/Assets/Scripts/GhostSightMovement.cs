@@ -18,7 +18,7 @@ public class GhostSightMovement : MonoBehaviour
     {
         center = GameObject.FindGameObjectWithTag("Ghost").transform.position;
         center.z -= z_offset;
-        center.y = 0.5f;
+        center.y = 0.0f;
         timer = 0;
     }
 
