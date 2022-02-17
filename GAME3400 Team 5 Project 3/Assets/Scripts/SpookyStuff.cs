@@ -19,6 +19,8 @@ public class SpookyStuff : MonoBehaviour
 
     private Color initialColor;
 
+    public static event Action KillPlayerEvent;
+
     private float nextDamageTime = 0f;
     private bool canTakeDamage
     {
@@ -50,7 +52,7 @@ public class SpookyStuff : MonoBehaviour
 
     public void AttackPlayer()
     {
-        
+        this.InvokeKillEvent();
     }
 
     public void TakeDamage() 
@@ -65,6 +67,14 @@ public class SpookyStuff : MonoBehaviour
                 ghostDead.Invoke();
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void InvokeKillEvent()
+    {
+        if (KillPlayerEvent != null)
+        {
+            KillPlayerEvent.Invoke();
         }
     }
 }
