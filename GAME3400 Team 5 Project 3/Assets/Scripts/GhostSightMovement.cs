@@ -25,7 +25,6 @@ public class GhostSightMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(playerSpotted);
         if (!playerSpotted)
         {
             timer += Time.deltaTime;
