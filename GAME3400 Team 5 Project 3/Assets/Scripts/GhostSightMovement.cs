@@ -111,7 +111,6 @@ public class GhostSightMovement : MonoBehaviour
                 }
             }
             playerSpotted = spotted;
-            Debug.Log(playerSpotted);
         }
     }
 
