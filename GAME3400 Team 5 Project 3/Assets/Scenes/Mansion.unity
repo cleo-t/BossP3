@@ -7938,8 +7938,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8903de51fe2f374681c5ad62c602fdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x_oscillation_magnitude: 20
-  z_oscillation_magnitude: 10
   rotationSpeed: 1
   z_offset: 5
 --- !u!136 &257666360
