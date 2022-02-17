@@ -22,6 +22,7 @@ public class GhostSightMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(playerSpotted);
         if (!playerSpotted)
         {
             MoveVision();
@@ -54,9 +55,23 @@ public class GhostSightMovement : MonoBehaviour
                     // Attack the player
                     playerSpotted = true;
                     FindObjectOfType<SpookyStuff>().AttackPlayer();
-
                 }
+                else
+                {
+                    playerSpotted = false;
+                }
+            } else
+            {
+                playerSpotted = false;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerSpotted = false;
         }
     }
 }
