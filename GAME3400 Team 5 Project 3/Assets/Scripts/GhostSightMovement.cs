@@ -11,12 +11,15 @@ public class GhostSightMovement : MonoBehaviour
     public float z_offset = 5;
 
     static public bool playerSpotted = false;
+
+    float timer;
     // Start is called before the first frame update
     void Start()
     {
         center = GameObject.FindGameObjectWithTag("Ghost").transform.position;
         center.z -= z_offset;
         center.y = 0.5f;
+        timer = 0;
     }
 
     // Update is called once per frame
@@ -24,16 +27,21 @@ public class GhostSightMovement : MonoBehaviour
     {
         if (!playerSpotted)
         {
+            timer += Time.deltaTime;
             MoveVision();
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position, 0.5f);
         }
         
     }
 
     void MoveVision()
     {
-        float x = Mathf.Sin(rotationSpeed * Time.time) * x_oscillation_magnitude;
+        float x = Mathf.Sin(rotationSpeed * timer) * x_oscillation_magnitude;
 
-        float z = Mathf.Cos(rotationSpeed * Time.time) * z_oscillation_magnitude;
+        float z = Mathf.Cos(rotationSpeed * timer) * z_oscillation_magnitude;
 
         transform.position = new Vector3(center.x + x, center.y, center.z + z);
     }
@@ -45,9 +53,14 @@ public class GhostSightMovement : MonoBehaviour
             int layerMask = LayerMask.GetMask("Ghost");
             layerMask = ~layerMask;
 
-            Ray r = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, GameObject.FindGameObjectWithTag("Player").transform.position - GameObject.FindGameObjectWithTag("Ghost").transform.position);
+            Vector3 headCheck = GameObject.FindGameObjectWithTag("Player").transform.position;
+            headCheck.y = GameObject.FindObjectOfType<CharacterController>().height * GameObject.FindGameObjectWithTag("Player").transform.localScale.y;
+
+            Ray r1 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, GameObject.FindGameObjectWithTag("Player").transform.position - GameObject.FindGameObjectWithTag("Ghost").transform.position);
+            Ray r2 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, headCheck - GameObject.FindGameObjectWithTag("Ghost").transform.position);
             RaycastHit hit;
-            if (Physics.Raycast(r, out hit, 500, layerMask))
+            RaycastHit hit2;
+            if (Physics.Raycast(r1, out hit, 500, layerMask))
             {
                 if (hit.collider.tag == "Player")
                 {
@@ -59,7 +72,26 @@ public class GhostSightMovement : MonoBehaviour
                 {
                     playerSpotted = false;
                 }
-            } else
+            }
+            else
+            {
+                playerSpotted = false;
+            }
+
+            if (Physics.Raycast(r2, out hit2, 500, layerMask))
+            {
+                if (hit2.collider.tag == "Player")
+                {
+                    // Attack the player
+                    playerSpotted = true;
+                    FindObjectOfType<SpookyStuff>().AttackPlayer();
+                }
+                else
+                {
+                    playerSpotted = false;
+                }
+            }
+            else
             {
                 playerSpotted = false;
             }
@@ -68,7 +100,7 @@ public class GhostSightMovement : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             playerSpotted = false;
         }
