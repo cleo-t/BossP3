@@ -8630,6 +8630,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostHealth: 500
   damageInterval: 1
+  GhostMoan: {fileID: 8300000, guid: 09b7aa16c94fa4e2d84115c7aa15cfab, type: 3}
+  GhostSpot: {fileID: 8300000, guid: 5c77f3d178ed54c69a1e642f0e9fc57f, type: 3}
+  GhostShot: {fileID: 8300000, guid: 996cba66e630344b18336ba757e3e02c, type: 3}
+  vulnerableColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!95 &8112036503554968616
 Animator:
   serializedVersion: 3
