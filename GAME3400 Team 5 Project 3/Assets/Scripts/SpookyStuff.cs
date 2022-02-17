@@ -8,6 +8,10 @@ public class SpookyStuff : MonoBehaviour
     public int ghostHealth = 500;
     public float damageInterval = 10f;
 
+    public AudioClip GhostMoan;
+    public AudioClip GhostSpot;
+    public AudioClip GhostS
+
     public static event Action ghostDead;
 
     [SerializeField]
@@ -58,7 +62,8 @@ public class SpookyStuff : MonoBehaviour
     {
         if (this.canTakeDamage)  
         {
-            nextDamageTime = Time.time + damageInterval;
+            
+            nextDamageTime = Time.time + damageInterval; 
             ghostHealth -= 50;
 
             if (ghostHealth <= 0) {
