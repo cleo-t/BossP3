@@ -16,6 +16,7 @@ public class GhostSightMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         center = GameObject.FindGameObjectWithTag("Ghost").transform.position;
         center.z -= z_offset;
         center.y = 0.0f;
@@ -64,8 +65,7 @@ public class GhostSightMovement : MonoBehaviour
             {
                 if (hit.collider.tag == "Player")
                 {
-                    // Play sound
-                    
+                    AudioSource.PlayClipAtPoint(GameObject.FindGameObjectWithTag("Ghost").GetComponent<SpookyStuff>().GhostSpot, center);
                 }
             }
 
@@ -73,8 +73,7 @@ public class GhostSightMovement : MonoBehaviour
             {
                 if (hit2.collider.tag == "Player")
                 {
-                    // Play sound
-
+                    AudioSource.PlayClipAtPoint(GameObject.FindGameObjectWithTag("Ghost").GetComponent<SpookyStuff>().GhostSpot, center);
                 }
             }
         }
