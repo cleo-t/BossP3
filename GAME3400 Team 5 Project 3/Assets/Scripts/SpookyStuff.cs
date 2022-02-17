@@ -10,7 +10,7 @@ public class SpookyStuff : MonoBehaviour
 
     public AudioClip GhostMoan;
     public AudioClip GhostSpot;
-    public AudioClip GhostS
+    public AudioClip GhostShot;
 
     public static event Action ghostDead;
 
@@ -62,7 +62,6 @@ public class SpookyStuff : MonoBehaviour
     {
         if (this.canTakeDamage)  
         {
-            
             nextDamageTime = Time.time + damageInterval; 
             ghostHealth -= 50;
 
