@@ -91,25 +91,26 @@ public class GhostSightMovement : MonoBehaviour
             Vector3 headCheck = GameObject.FindGameObjectWithTag("Player").transform.position;
             headCheck.y = GameObject.FindObjectOfType<CharacterController>().height * GameObject.FindGameObjectWithTag("Player").transform.localScale.y;
 
-            Ray r1 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, headCheck - GameObject.FindGameObjectWithTag("Ghost").transform.position);
+            Ray r1 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, GameObject.FindGameObjectWithTag("Player").transform.position - GameObject.FindGameObjectWithTag("Ghost").transform.position);
+            Ray r2 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, headCheck - GameObject.FindGameObjectWithTag("Ghost").transform.position);
             RaycastHit hit;
+            RaycastHit hit2;
+            bool spotted = false;
             if (Physics.Raycast(r1, out hit, 500, layerMask))
             {
                 if (hit.collider.tag == "Player")
                 {
-                    // Attack the player
-                    playerSpotted = true;
-                    FindObjectOfType<SpookyStuff>().AttackPlayer();
-                }
-                else
-                {
-                    playerSpotted = false;
+                    spotted = true;
                 }
             }
-            else
+            else if (Physics.Raycast(r2, out hit2, 500, layerMask))
             {
-                playerSpotted = false;
+                if (hit2.collider.tag == "Player")
+                {
+                    spotted = true;
+                }
             }
+            playerSpotted = spotted;
             Debug.Log(playerSpotted);
         }
     }
