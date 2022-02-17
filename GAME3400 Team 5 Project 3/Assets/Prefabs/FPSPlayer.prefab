@@ -348,6 +348,7 @@ MonoBehaviour:
   range: 100
   gun: {fileID: 8502817431850528198}
   fpsCam: {fileID: 6167447521975995378}
+  crosshair: {fileID: 6949224795509074149}
 --- !u!136 &1352370951
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
@@ -51,7 +52,7 @@ public class FPSPlayer : MonoBehaviour
         }
         */
         this.gun.active = false;
-        this.crosshair.active = false;
+        this.crosshair.enabled = false;
         
     }
 
@@ -122,7 +123,7 @@ public class FPSPlayer : MonoBehaviour
         if (other.transform.name == "FloorShotgun") {
             hasGun = true;
             gun.active = true;
-            crosshair.active = true;
+            crosshair.enabled = true;
             Destroy(other.gameObject);
             return;
         }
