@@ -62,6 +62,7 @@ public class SpookyStuff : MonoBehaviour
     {
         if (this.canTakeDamage)  
         {
+            AudioSource.PlayClipAtPoint(GhostShot, this.transform.position);
             nextDamageTime = Time.time + damageInterval; 
             ghostHealth -= 50;
 
