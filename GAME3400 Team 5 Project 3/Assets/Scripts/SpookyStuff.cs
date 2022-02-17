@@ -7,22 +7,38 @@ public class SpookyStuff : MonoBehaviour
     public int ghostHealth = 500;
     public float damageInterval = 10f;
 
+    [SerializeField]
+    private Color vulnerableColor;
+
+    private Color initialColor;
 
     private float nextDamageTime = 0f;
-    private bool canTakeDamage = true;
-    
+    private bool canTakeDamage
+    {
+        get
+        {
+            return Time.time > this.nextDamageTime;
+        }
+        set
+        {
+
+        }
+    }
+
+    private Renderer renderComp;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.renderComp = this.GetComponent<Renderer>();
+        this.initialColor = this.renderComp.material.color;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("GhostSight").transform);
-
+        this.renderComp.material.color = this.canTakeDamage ? this.vulnerableColor : this.initialColor;
     }
 
     public void AttackPlayer()
@@ -32,7 +48,7 @@ public class SpookyStuff : MonoBehaviour
 
     public void TakeDamage() 
     {
-        if (canTakeDamage && Time.time >= nextDamageTime)  
+        if (this.canTakeDamage)  
         {
             nextDamageTime = Time.time + 10f;
             ghostHealth -= 50;
