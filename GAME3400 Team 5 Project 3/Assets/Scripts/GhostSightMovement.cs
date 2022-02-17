@@ -5,10 +5,11 @@ using UnityEngine;
 public class GhostSightMovement : MonoBehaviour
 {
     Vector3 center;
-    public float x_oscillation_magnitude = 30;
-    public float z_oscillation_magnitude = 15;
+    float x_oscillation_magnitude = 20;
+    float z_oscillation_magnitude = 10;
     public float rotationSpeed = 1;
     public float z_offset = 5;
+    private float moveSeconds = 5;
 
     static public bool playerSpotted = false;
 
@@ -21,6 +22,8 @@ public class GhostSightMovement : MonoBehaviour
         center.z -= z_offset;
         center.y = 0.0f;
         timer = 0;
+
+        Pottery.PotDestroyed += this.MoveToSecondFloor;
     }
 
     // Update is called once per frame
@@ -68,8 +71,7 @@ public class GhostSightMovement : MonoBehaviour
                     AudioSource.PlayClipAtPoint(GameObject.FindGameObjectWithTag("Ghost").GetComponent<SpookyStuff>().GhostSpot, center);
                 }
             }
-
-            if (Physics.Raycast(r2, out hit2, 500, layerMask))
+            else if (Physics.Raycast(r2, out hit2, 500, layerMask))
             {
                 if (hit2.collider.tag == "Player")
                 {
@@ -89,34 +91,15 @@ public class GhostSightMovement : MonoBehaviour
             Vector3 headCheck = GameObject.FindGameObjectWithTag("Player").transform.position;
             headCheck.y = GameObject.FindObjectOfType<CharacterController>().height * GameObject.FindGameObjectWithTag("Player").transform.localScale.y;
 
-            Ray r1 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, GameObject.FindGameObjectWithTag("Player").transform.position - GameObject.FindGameObjectWithTag("Ghost").transform.position);
-            Ray r2 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, headCheck - GameObject.FindGameObjectWithTag("Ghost").transform.position);
+            Ray r1 = new Ray(GameObject.FindGameObjectWithTag("Ghost").transform.position, headCheck - GameObject.FindGameObjectWithTag("Ghost").transform.position);
             RaycastHit hit;
-            RaycastHit hit2;
             if (Physics.Raycast(r1, out hit, 500, layerMask))
             {
                 if (hit.collider.tag == "Player")
                 {
                     // Attack the player
                     playerSpotted = true;
-                    FindObjectOfType<SpookyStuff>().AttackPlayer();
-                }
-                else
-                {
-                    playerSpotted = false;
-                }
-            }
-            else
-            {
-                playerSpotted = false;
-            }
-
-            if (Physics.Raycast(r2, out hit2, 500, layerMask))
-            {
-                if (hit2.collider.tag == "Player")
-                {
-                    // Attack the player
-                    playerSpotted = true;
+                    Debug.Log("penis");
                     FindObjectOfType<SpookyStuff>().AttackPlayer();
                 }
                 else
@@ -138,4 +121,16 @@ public class GhostSightMovement : MonoBehaviour
             playerSpotted = false;
         }
     }
+
+    void MoveToSecondFloor()
+    {
+        playerSpotted = true;
+
+        center.y = 9.1f;
+        center.z += 4;
+        x_oscillation_magnitude = 10;
+        z_oscillation_magnitude = 5;
+    }
+
+
 }
