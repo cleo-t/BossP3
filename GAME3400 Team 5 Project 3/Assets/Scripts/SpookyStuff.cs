@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class SpookyStuff : MonoBehaviour
 {
-    public int ghostHealth = 500;
-    public float damageInterval = 10f;
-
     public AudioClip GhostMoan;
     public AudioClip GhostSpot;
     public AudioClip GhostShot;
+
+    public int ghostHealth = 500;
+    public float damageInterval = 10f;
 
     public static event Action ghostDead;
 
