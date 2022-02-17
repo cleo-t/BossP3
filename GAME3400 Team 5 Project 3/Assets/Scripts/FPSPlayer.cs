@@ -34,6 +34,9 @@ public class FPSPlayer : MonoBehaviour
     public Camera fpsCam;
     public Image crosshair;
 
+    public AudioClip pickUpGunClip;
+    public AudioClip shootGunClip;
+
     private bool isCrouching;
     private bool hasGun = false;
     private float initialYScale;
@@ -121,6 +124,7 @@ public class FPSPlayer : MonoBehaviour
 
     void OnTriggerEnter(Collider other) {
         if (other.transform.name == "FloorShotgun") {
+            AudioSource.PlayClipAtPoint(pickUpGunClip, this.transform.position);
             hasGun = true;
             gun.SetActive(true);
             crosshair.enabled = true;
@@ -133,6 +137,7 @@ public class FPSPlayer : MonoBehaviour
     private void Shoot() 
     {
         RaycastHit target;
+        AudioSource.PlayClipAtPoint(shootGunClip, this.transform.position);
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out target, range)) {
 
             SpookyStuff ghost = target.transform.GetComponent<SpookyStuff>();

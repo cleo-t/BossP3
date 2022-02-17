@@ -129,7 +129,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17770
+  m_Name: pb_Mesh243446
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9827,6 +9827,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FPSPlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 6167447522876993382, guid: c58d714c858ffb743ad4638a4eee8f32, type: 3}
+      propertyPath: shootGunClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fc62f2f00a98f41e98f129aacef17eb4, type: 3}
+    - target: {fileID: 6167447522876993382, guid: c58d714c858ffb743ad4638a4eee8f32, type: 3}
+      propertyPath: pickUpGunClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f843304081564498ca91cd0504b4c1f9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c58d714c858ffb743ad4638a4eee8f32, type: 3}
 --- !u!1 &1513402804

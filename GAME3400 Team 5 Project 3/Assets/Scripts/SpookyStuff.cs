@@ -50,7 +50,7 @@ public class SpookyStuff : MonoBehaviour
     {
         if (this.canTakeDamage)  
         {
-            nextDamageTime = Time.time + 10f;
+            nextDamageTime = Time.time + damageInterval;
             ghostHealth -= 50;
 
             if (ghostHealth <= 0) {
