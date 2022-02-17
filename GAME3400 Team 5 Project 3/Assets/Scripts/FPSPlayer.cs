@@ -29,18 +29,30 @@ public class FPSPlayer : MonoBehaviour
     [SerializeField]
     public float range = 100f;
 
+    public GameObject gun;
     public Camera fpsCam;
+    public Image crosshair;
 
     private bool isCrouching;
+    private bool hasGun = false;
     private float initialYScale;
 
     private CharacterController cc;
+    
 
     void Start()
     {
         this.cc = this.GetComponent<CharacterController>();
         this.isCrouching = false;
         this.initialYScale = this.transform.localScale.y;
+        /*
+        if (gun == null) {
+            this.gun = gameObject.transform.GetChild(1).gameObject;
+        }
+        */
+        this.gun.active = false;
+        this.crosshair.active = false;
+        
     }
 
     private void Update()
@@ -49,7 +61,7 @@ public class FPSPlayer : MonoBehaviour
         this.Turn(turnInput);
         this.isCrouching = this.GetCrouchInput();
 
-        if (Input.GetButtonDown("Fire1")) {
+        if (Input.GetButtonDown("Fire1") && hasGun) {
             Shoot();
         }
     }
@@ -104,6 +116,17 @@ public class FPSPlayer : MonoBehaviour
             crouching ? this.initialYScale * this.crouchHeightCoeff : this.initialYScale,
             this.transform.localScale.z);
         this.cc.enabled = true;
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.transform.name == "FloorShotgun") {
+            hasGun = true;
+            gun.active = true;
+            crosshair.active = true;
+            Destroy(other.gameObject);
+            return;
+        }
+
     }
 
     private void Shoot() 
