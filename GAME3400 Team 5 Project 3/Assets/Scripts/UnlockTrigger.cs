@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UnlockTrigger : MonoBehaviour
 {
+    public static event Action TriggerUnlocked;
+
     [SerializeField]
     private GameObject thingToDelete;
     [SerializeField]
@@ -30,6 +33,12 @@ public class UnlockTrigger : MonoBehaviour
         if (this.unlockSound != null)
         {
             AudioSource.PlayClipAtPoint(this.unlockSound, this.transform.position);
+        }
+
+        if (TriggerUnlocked != null)
+        {
+            Debug.Log("Event");
+            TriggerUnlocked.Invoke();
         }
 
         Destroy(this.gameObject);
