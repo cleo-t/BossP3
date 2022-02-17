@@ -9,9 +9,16 @@ public class UnlockTrigger : MonoBehaviour
     [SerializeField]
     private AudioClip unlockSound;
 
+    private FPSPlayer player;
+
+    private void Start()
+    {
+        this.player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSPlayer>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && this.player.crouching)
         {
             this.Unlock();
         }
