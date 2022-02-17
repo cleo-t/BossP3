@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class SpookyStuff : MonoBehaviour
 {
     public int ghostHealth = 500;
     public float damageInterval = 10f;
+
+    public static event Action ghostDead;
 
     [SerializeField]
     private Color vulnerableColor;
@@ -39,6 +42,11 @@ public class SpookyStuff : MonoBehaviour
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("GhostSight").transform);
         this.renderComp.material.color = this.canTakeDamage ? this.vulnerableColor : this.initialColor;
+
+        if (ghostHealth <= 0 && ghostDead != null)
+        {
+            ghostDead.Invoke();
+        }
     }
 
     public void AttackPlayer()
