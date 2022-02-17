@@ -16,6 +16,7 @@ public class FPSCamera : MonoBehaviour
     private void Start()
     {
         this.angle = 0;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()

@@ -139,6 +139,13 @@ public class FPSPlayer : MonoBehaviour
 
             if (ghost != null) {
                 ghost.TakeDamage();
+            } else
+            {
+                Pottery pottery = target.transform.GetComponent<Pottery>();
+                if (pottery != null)
+                {
+                    pottery.TakeDamage();
+                }
             }
         }
     }
