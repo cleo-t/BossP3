@@ -99,7 +99,6 @@ public class GhostSightMovement : MonoBehaviour
                 {
                     // Attack the player
                     playerSpotted = true;
-                    Debug.Log("penis");
                     FindObjectOfType<SpookyStuff>().AttackPlayer();
                 }
                 else
@@ -111,6 +110,7 @@ public class GhostSightMovement : MonoBehaviour
             {
                 playerSpotted = false;
             }
+            Debug.Log(playerSpotted);
         }
     }
 
