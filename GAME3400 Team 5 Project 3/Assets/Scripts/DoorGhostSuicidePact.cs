@@ -18,6 +18,6 @@ public class DoorGhostSuicidePact : MonoBehaviour
 
     private void Suicide()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
