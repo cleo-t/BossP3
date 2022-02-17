@@ -51,7 +51,7 @@ public class FPSPlayer : MonoBehaviour
             this.gun = gameObject.transform.GetChild(1).gameObject;
         }
         */
-        this.gun.active = false;
+        this.gun.SetActive(false);
         this.crosshair.enabled = false;
         
     }
@@ -122,7 +122,7 @@ public class FPSPlayer : MonoBehaviour
     void OnTriggerEnter(Collider other) {
         if (other.transform.name == "FloorShotgun") {
             hasGun = true;
-            gun.active = true;
+            gun.SetActive(true);
             crosshair.enabled = true;
             Destroy(other.gameObject);
             return;
