@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class SpookyStuff : MonoBehaviour
 {
-    public int ghostHealth = 500;
-    public float damageInterval = 10f;
-
     public AudioClip GhostMoan;
     public AudioClip GhostSpot;
     public AudioClip GhostShot;
+
+    public int ghostHealth = 500;
+    public float damageInterval = 10f;
 
     public static event Action ghostDead;
 
@@ -46,11 +46,6 @@ public class SpookyStuff : MonoBehaviour
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("GhostSight").transform);
         this.renderComp.material.color = this.canTakeDamage ? this.vulnerableColor : this.initialColor;
-
-        if (ghostHealth <= 0 && ghostDead != null)
-        {
-            ghostDead.Invoke();
-        }
     }
 
     public void AttackPlayer()
@@ -62,10 +57,12 @@ public class SpookyStuff : MonoBehaviour
     {
         if (this.canTakeDamage)  
         {
+            AudioSource.PlayClipAtPoint(GhostShot, this.transform.position);
             nextDamageTime = Time.time + damageInterval; 
             ghostHealth -= 50;
 
             if (ghostHealth <= 0) {
+                ghostDead.Invoke();
                 Destroy(gameObject);
             }
         }
